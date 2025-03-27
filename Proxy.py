@@ -52,6 +52,7 @@ while True:
     print('Waiting for connection...')
     clientSocket = None
     
+    
     # Accept connection from client and store in the clientSocket
     try:
         # ~~~~ INSERT CODE ~~~~
