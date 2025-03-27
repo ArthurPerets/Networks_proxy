@@ -127,6 +127,9 @@ originServerRequestHeader = ''
 # originServerRequest is the first line in the request and
 # originServerRequestHeader is the second line in the request
 # ~~~~ INSERT CODE ~~~~
+originServerRequest='GET '+resource+' HTTP/1.1'
+originServerRequestHeader='Host: '+hostname
+
 # ~~~~ END CODE INSERT ~~~~
 # Construct the request to send to the origin server
 request = originServerRequest + '\r\n' + originServerRequestHeader + '\r\n\r\
@@ -143,9 +146,16 @@ sys.exit()
 print('Request sent to origin server\n')
 # Get the response from the origin server
 # ~~~~ INSERT CODE ~~~~
+orgin_response=b""
+while True:
+  response=originServerSocket.recv(BUFFER_SIZE)
+  if not data:
+    break
+    orgin_response+=response
 # ~~~~ END CODE INSERT ~~~~
 # Send the response to the client
 # ~~~~ INSERT CODE ~~~~
+clientSocket.sendall(orgin_response)
 # ~~~~ END CODE INSERT ~~~~
 # Create a new file in the cache for the requested file.
 cacheDir, file = os.path.split(cacheLocation)
